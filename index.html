@@ -5,7 +5,6 @@
 	<title>imageDraw</title>
   	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
   	<script src="http://hammerjs.github.io/dist/hammer.js"></script>
-	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 	<script src="./js/jquery.js"></script>
 </head>
 <body>
@@ -22,45 +21,7 @@
 	    event.preventDefault();
 	}, false);
 	jQuery(document).ready(function($) {
-        var url= location.href;
-        var appId="";
-        var timestamp="";
-        var nonceStr="";
-        var signature="";
-        var urlBack="";
-        $.ajax({
-            type: 'GET',
-            url:'http://hyundai.koo7.com/index.php/jsonBack',
-            data:{"url":url},
-            dataType: 'json',
-            async: false,
-            success: function(data) {
-            	
-            	appId=data.appId;
-            	timestamp=data.timestamp;
-            	nonceStr=data.nonceStr;
-            	signature=data.signature;
-            	urlBack=data.url;
-
-	            wx.config({
-	                //debug: true,
-	                appId:appId,
-	                timestamp: timestamp,
-	                nonceStr: nonceStr,
-	                signature: signature,
-	               jsApiList: [
-	                    'checkJsApi',
-	                    'onMenuShareTimeline',
-	                    'onMenuShareAppMessage',
-	                    'onMenuShareQQ',
-	                    'onMenuShareWeibo',
-	                    'chooseImage',
-	                    'uploadImage'
-	                  ]
-	            });
-	        }
-	    });
-
+        
 		var canvas = document.getElementById("canvas");
 		var ctx = canvas.getContext("2d");
 		canvas.width = document.body.clientWidth;
@@ -86,31 +47,15 @@
 
 		var outerImg = new Image();
 		//outerImg.src = "./images/1.png";
-        wx.ready(function () {
         	outerImg.src = "./images/1.png";
 			outerImg.onload = function(){
 
 				ctx.drawImage(outerImg,0,0,WIDTH,HEIGHT);
 				$("#canvas").one('click', function(event) {
-					/* Act on the event */
-					//img.src = "./images/360205246780165223b.jpg";
-					//return false;
-					wx.chooseImage({
-					    count: 1, // 默认9
-					    sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-					    sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-					    success: function (res) {
-					        var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-					        img.src = localIds;
-					        //img.crossOrigin = 'anonymous';
-					        //img.src = 'http://img.mukewang.com/566523440001a31c02990201-210-130.jpg';
-					        //console.log(localIds);
 					        img.src = "./images/360205246780165223b.jpg";
 					        //img.src = "./images/DSC06147.JPG";
 					        //因为canvas不同源存在跨域问题，后端需要提供一个接口，需要把上传到微信服务器的图片，拉取到客户自己的服务器，再把地址返给前端。
 					        //
-					    }
-					});
 				});
 			}
 
@@ -264,7 +209,6 @@
 	    		});
 			}
 
-        });
 
 
 		
