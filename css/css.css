@@ -1,0 +1,19 @@
+.canvasOuter{
+	position: relative;
+}
+
+#btn-djsczp{
+	position: absolute;
+	width: 45%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	top: 30%;
+	transition: 1s;
+}
+#btn-djsczp.hide{
+	opacity: 0;
+}
+#hide{
+	opacity: 0;
+	display: none;
+}
