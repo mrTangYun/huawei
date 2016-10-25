@@ -39,17 +39,8 @@ function previewFile() {
     img.src = reader.result;
   }, false);
 
-  if (file &&  /\.(jpe?g|png|gif)$/i.test(file.name) ) {
-  	//console.log(file);
-  	//$("#tips").text(/\.(jpe?g|png|gif)$/i.test(file.name));
+  if (file) {
     reader.readAsDataURL(file);
-  }
-  else{
-  	$("#tips").text("请选择图片");
-  	$("#btn-djsczp").show();
-  	setTimeout(function(){
-  		$("#btn-djsczp").removeClass('hide');
-  	},1);
   }
 }
 	document.body.addEventListener('touchmove', function (event) {
@@ -88,12 +79,32 @@ function previewFile() {
         	outerImg.src = "./images/1.png";
 			outerImg.onload = function(){
 				ctx.drawImage(outerImg,0,0,WIDTH,HEIGHT);
-				$("#btn-djsczp").on('click', function(event) {
+				$("#btn-djsczp").one('click', function(event) {
 					$("#btn-djsczp").addClass('hide');
 					$("#inputFile").click();
 					setTimeout(function(){
-						$("#btn-djsczp").hide();
+						$("#btn-djsczp").remove();
 					},1000);
+					/* Act on the event */
+					//img.src = "./images/360205246780165223b.jpg";
+					//return false;
+					
+					        // img.src = localIds;
+					        // var imgFile = new FileReader();  
+						       //  imgFile.readAsDataURL(img);  
+						       //  imgFile.onload = function () {  
+						       //      var imgData = this.result; //base64数据    
+						       //      img.src = imgData;
+						       //  }  
+					        //img.crossOrigin = '*';
+					        //
+							//img.setAttribute('crossOrigin', 'anonymous');
+					        //img.src = 'http://img.mukewang.com/566523440001a31c02990201-210-130.jpg';
+					        //console.log(localIds);
+					        //img.src = "./images/360205246780165223a.jpg";
+					        //img.src = "./images/DSC06147.JPG";
+					        //因为canvas不同源存在跨域问题，后端需要提供一个接口，需要把上传到微信服务器的图片，拉取到客户自己的服务器，再把地址返给前端。
+					        //
 				});
 			}
 
